@@ -2,7 +2,11 @@
 Converts HEIF images created on iOS 11 devices as fast as ~~humanly~~ possible.
 
 
-**NOTE: The sole purpose of this repository is to be able to use tifig out of box, as the original repository is being unmaintained, does not accept pull requests for years now, and the code did not compile due to changes in the libraries.** I'm not planning to develop the project, nor to look for the bugs or security problems in the code. You may want to open pull request for such purposes.
+**NOTE: The sole purpose of this repository is to be able to use tifig out of box, as the [original repository](https://github.com/monostream/tifig) is being unmaintained, does [not accept pull requests](https://github.com/monostream/tifig/pull/58) for years now, and the code [did not compile due to changes in the libraries](https://github.com/monostream/tifig/issues/75).** 
+
+The fork has been tested on Ubuntu 22.04 with up to date libraries (libswscale and livavcodec 7:4.4.1; libvips 8.12.1-1 )
+
+I'm not planning to develop the project, nor to look for the bugs or security problems in the code. If you find any of these - you may want to open pull request, rather than waiting for things to be fixed.
 
 
 ## Build Dependencies
