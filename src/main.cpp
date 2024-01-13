@@ -1,6 +1,5 @@
-#include <cxxopts.hpp>
+#include "../lib/cxxopts/include/cxxopts.hpp"
 #include <log.hpp>
-
 #include "version.h"
 #include "loader.hpp"
 
@@ -107,12 +106,12 @@ int convert(const string& inputFilename, Opts& options)
     return 0;
 }
 
-Opts getTifigOptions(cxxopts::Options& options)
+Opts getTifigOptions(cxxopts::ParseResult options)
 {
     Opts opts = {};
 
     if (options.count("output"))
-        opts.outputPath = options["output"].as<string>();
+        opts.outputPath = options["output"].as<std::string>();
     if (options.count("width"))
         opts.width = options["width"].as<int>();
     if (options.count("height"))
@@ -165,15 +164,13 @@ int main(int argc, char* argv[])
                 ("version", "Show tifig version ")
                 ;
 
-        options.parse(argc, argv);
-
-        if (options.count("version")) {
+        auto result = options.parse(argc, argv);
+        if (result.count("version")) {
             printVersion();
             retval = 0;
-        } else if (options.count("input")) {
-            string inputFileName = options["input"].as<string>();
-
-            Opts tifigOptions = getTifigOptions(options);
+        } else if (result.count("input")) {
+            string inputFileName = result["input"].as<std::string>();
+            Opts tifigOptions = getTifigOptions(result);
 
             chrono::steady_clock::time_point begin = chrono::steady_clock::now();
 
@@ -189,7 +186,7 @@ int main(int argc, char* argv[])
             cerr << options.help() << endl;
         }
     }
-    catch (const cxxopts::OptionException& oe) {
+    catch (const cxxopts::exceptions::exception& oe) {
         cerr << "error parsing options: " << oe.what() << endl;
     }
     catch (const FileReaderException& fre) {

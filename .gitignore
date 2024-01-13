@@ -7,7 +7,7 @@ CMakeFiles
 Makefile
 cmake_install.cmake
 cmake-build-*
-build/
+build
 compile_commands.json
 
 # Binary
@@ -21,3 +21,4 @@ heifthumb.cbp
 # test data
 test/venv
 test/*.jpg
+test/*/*.jpeg
