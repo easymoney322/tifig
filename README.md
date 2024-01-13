@@ -27,14 +27,17 @@ This one-liner should get you going:
     sudo apt install libvips-dev
     sudo apt install libswscale-dev
     sudo apt install libavcodec-dev
-
-
+    
+##### Requirements for static-linked binary
+    sudo apt install libvpx-dev libzvbi-dev libmp3lame-dev libsnappy-dev libgsm1-dev libopus-dev libshine-dev libtwolame-dev libxvidcore-dev libspeex-dev libmfx-dev libtheora-dev libvorbis-dev libx264-dev libsoxr-dev libvdpau-dev libxv-dev libzstd-dev libnuma-dev
+    sudo apt install libva-dev            <-- May conflict with wayland
+    
 ## Build (Tested on Ubuntu 22.04.3 LTS)
 
     git clone --recursive https://github.com/monostream/tifig.git
     mkdir tifig/build && cd tifig/build
     cmake ..
-    make
+    make -j `nproc`
 
 
 ## Tests
