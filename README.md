@@ -1,8 +1,8 @@
 # tifig
-
 Converts HEIF images created on iOS 11 devices as fast as ~~humanly~~ possible.
 
-*NOTE*: While we do not have the time to actively maintain tifig anymore, it is functional at a very alpha state. We are open to new maintainers taking the lead. 
+
+**NOTE: The sole purpose of this repository is to be able to use tifig out of box, as the original repository is being unmaintained, does not accept pull requests for years now, and the code did not compile due to changes in the libraries.** I'm not planning to develop the project, nor to look for the bugs or security problems in the code. You may want to open pull request for such purposes.
 
 
 ## Build Dependencies
@@ -19,41 +19,25 @@ This one-liner should get you going:
     brew install cmake vips ffmpeg pkg-config
 
 
-#### Linux
-
-First of all, to just try out tifig, the easiest way is to [use our static builds](https://github.com/monostream/tifig/releases).
-
-However, if you do want to build from source, verify carefully that the minimally required versions are actually shipped and installed with your distro and release.
-
-For ffmpeg, check the output of:
-
-    ffmpeg -version
-
-Assuming you are using a ubuntu based system, this should help if your versions of 'libavcodec' and 'libswscale' is too old:
-
-    sudo add-apt-repository -y ppa:jonathonf/ffmpeg-3
-    sudo apt-get update
-    sudo apt-get install libavcodec-dev libswscale-dev
-
-Since tifig requires quite a modern version of `libvips`, building from source is probably required. [Follow the instructions here](http://jcupitt.github.io/libvips/install.html#building-libvips-from-a-source-tarball) .
-
-Again on ubuntu, something like this should do the trick:
-
-    sudo apt-get install build-essential pkg-config libglib2.0-dev libexpat1-dev libjpeg-dev libexif-dev libpng-dev libtiff-dev
-    wget https://github.com/jcupitt/libvips/releases/download/v8.6.1/vips-8.6.1.tar.gz
-    tar xzf vips-8.6.1.tar.gz
-    cd vips-8.6.1
-    ./configure
-    make
-    sudo make install
+#### Debian-like 
+    sudo apt install libvips-dev
+    sudo apt install libswscale-dev
+    sudo apt install libavcodec-dev
 
 
-## Build
+## Build (Tested on Ubuntu 22.04.3 LTS)
 
     git clone --recursive https://github.com/monostream/tifig.git
     mkdir tifig/build && cd tifig/build
     cmake ..
     make
+
+
+## Tests
+    python2 -m pip install pyssim
+    python2 -m pip install Pillow
+    python2 -m pip install colorprint
+    python2 test/tests.py
 
 
 ## Usage
@@ -86,21 +70,6 @@ Create a cropped thumbnail to match size exactly:
 When a size smaller or equal to 240x240 is requested, tifig will automatically use the embedded thumbnail.
 
 
-## Installing
-
-We release tifig as static x86_64 binary that should work on any linux without installing dependencies. The only requirement is glibc with a minimal version of 2.14. Just copy the binary to `/usr/local/bin` or wherever you want to.
-
-
-## ToDo's
-
-  * ~~Testing~~ 
-  * ~~Create independant static binary~~
-  * ~~Keep exif metadata in coverted images~~
-  * Cleanup and optimizing
-  * Replace Nokia library with DigiDNAs ISOBMFF parser
-  * Carry over color profiles
-  * Support single image HEIC
-  * Improve thumbnailing
   
 ## Software Used / Libraries
 
@@ -108,10 +77,3 @@ We release tifig as static x86_64 binary that should work on any linux without i
   * libvips https://github.com/jcupitt/libvips
   * ffmpeg https://www.ffmpeg.org/
   * cxxopts https://github.com/jarro2783/cxxopts
-  
-***Suggestions for improvements and Pull Requests highly welcome!***
- 
-
-
-
-  
